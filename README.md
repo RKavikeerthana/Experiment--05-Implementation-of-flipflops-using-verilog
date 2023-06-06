@@ -132,54 +132,66 @@ RegisterNumber: 212222100022
 
 ## SR FLIPFLOP
 ```
-module sr(s,r,clk,q,qbar);
-input s,r,clk;
-output q,qbar;
-reg q,qbar;
-always @(posedge clk)
-begin
-q<=s|(~r&q);
-qbar<=r|(~s&~q);
-end
-endmodule
+module sr(S,R,clk,Q,Qbar);
+	input S,R,clk;
+	output reg Q;
+	output reg Qbar;
+	initial Q=0;
+	initial Qbar=1;
+	always @(posedge clk)
+	begin
+	Q=S|((~R)&Q);
+	Qbar=R|((~S)&(Qbar));
+	end
+	endmodule
+
 ```
 ## JK FLIPFLOP
 ```
-module jk(j,k,clk,q,qbar);
-input j,k,clk;
-output q,qbar;
-reg q,qbar;
+module jk(J,K,clk,Q,Qbar);
+input J,K,clk;
+output reg Q;
+output reg Qbar;
+initial Q=0;
+initial Qbar=1;
 always @(posedge clk)
 begin
-q<=(j&~q)|(~k&q);
-qbar<=~q;
-end 
+Q=(J&(~Q))|((~K)&Q);
+Qbar=((~J)&(Qbar))|K&(~Qbar);
+end
 endmodule
 ```
 ## T FLIPFLOP
 ```
-module t(clk,T,q,qbar);
-input clk,T;
-output q,qbar;
-reg q,qbar;
+module t(T,clk,Q,Qbar);
+input T,clk;
+output reg Q;
+output reg Qbar;
+initial Q=0;
+initial Qbar=1;
 always @(posedge clk)
 begin
-q<=(T&~q)|(~T&q);
-qbar<=~q;
-end 
+Q=(T&(~Q))|((~T)&Q);
+Qbar=((~T)&Qbar)|(T&(~Qbar));
+end
 endmodule
 ```
 
 ## D FLIPFLOP
 ```
-module d(d,clk,q,qbar);
-input d,clk; 
-output q,qbar;
-reg q,qbar; 
-always @(posedge clk) begin q<=d; 
-qbar<=~q; 
+module d(D,clk,Q,Qbar);
+input D,clk;
+output reg Q;
+output reg Qbar;
+initial Q=0;
+initial Qbar=1;
+always @(posedge clk)
+begin
+Q=D;
+Qbar=~D;
 end
 endmodule
+
 ```
 
 
@@ -203,9 +215,14 @@ endmodule
 ## SR FLIPFLOP
 ![image](https://github.com/RKavikeerthana/Experiment--05-Implementation-of-flipflops-using-verilog/assets/120431120/3aa01825-83e7-41b8-8fc7-e85273f86214)
 
+## JK FLIPFLOP
+![image](https://github.com/RKavikeerthana/Experiment--05-Implementation-of-flipflops-using-verilog/assets/120431120/3039acb5-3f65-4c5a-ac3c-424491b1f16c)
 
+## T FLIPFLOP
+![image](https://github.com/RKavikeerthana/Experiment--05-Implementation-of-flipflops-using-verilog/assets/120431120/8ac7f672-5a36-4662-bbde-dab60400187a)
 
-
+## D FLIPFLOP
+![image](https://github.com/RKavikeerthana/Experiment--05-Implementation-of-flipflops-using-verilog/assets/120431120/90b22ee3-b791-4b46-a9c6-9c5b5dcc3d71)
 
 
 
